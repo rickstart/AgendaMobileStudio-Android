@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 
 public class ContactDetailActivity extends ActionBarActivity {
@@ -20,7 +21,13 @@ public class ContactDetailActivity extends ActionBarActivity {
         contact = Contact.getData(getApplicationContext()).get(contactPosition);
 
         RoundedImageView profileImage = (RoundedImageView) findViewById(R.id.profileImage);
+        TextView textNameDetail = (TextView) findViewById(R.id.textNameDetail);
+        TextView textPhone = (TextView) findViewById(R.id.textPhone);
+        TextView textEmail = (TextView) findViewById(R.id.textEmail);
         profileImage.setImageDrawable(contact.getPicture());
+        textNameDetail.setText(contact.getName());
+        textPhone.setText(contact.getPhone());
+        textEmail.setText(contact.getEmail());
 
 
     }

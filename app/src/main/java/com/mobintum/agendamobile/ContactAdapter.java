@@ -34,14 +34,12 @@ public class ContactAdapter extends ArrayAdapter {
         ViewHolder holder = new ViewHolder();
 
         holder.textName = (TextView) rowView.findViewById(R.id.textName);
-        holder.textEmail = (TextView) rowView.findViewById(R.id.textEmail);
-        holder.textPhone = (TextView) rowView.findViewById(R.id.textPhone);
+
         holder.imgPic = (ImageView) rowView.findViewById(R.id.imgPic);
         Contact contact = contacts.get(position);
 
         holder.textName.setText(contact.getName());
-        holder.textEmail.setText(contact.getEmail());
-        holder.textPhone.setText(contact.getPhone());
+
         holder.imgPic.setImageDrawable(contact.getPicture());
 
         //convertView.setTag(holder);
@@ -51,8 +49,7 @@ public class ContactAdapter extends ArrayAdapter {
 
     static class ViewHolder{
         TextView textName;
-        TextView textEmail;
-        TextView textPhone;
+
         ImageView imgPic;
     }
 }
