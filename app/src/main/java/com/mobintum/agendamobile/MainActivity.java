@@ -1,9 +1,12 @@
 package com.mobintum.agendamobile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -21,25 +24,20 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         listContacts = (ListView) findViewById(R.id.listContacts);
-        arrayContact = new ArrayList<Contact>();
-
-
-        Contact juanCarlos = new Contact("Juan Carlos Martinez Avalos","jcmtza611@gmail.com","5591988868",getResources().getDrawable(R.mipmap.pic_juan));
-        Contact christian = new Contact("Christian Jesus Rodriguez Martinez", "jesusrdzmtzm@gmail.com", "5538753188", getResources().getDrawable(R.mipmap.pic_christian));
-        Contact alex = new Contact("Alejandro Xochihua Jorge", "alexochihua23@gmail.com","5560116967", getResources().getDrawable(R.mipmap.pic_alex));
-        Contact genaro = new Contact("Genaro Rodriguez", "grodriguezm@redcibercom.com.mx", "5528982474", getResources().getDrawable(R.mipmap.pic_genaro));
-        Contact ricardo = new Contact("Ricardo Centeno", "ricardo.celj@gmail.com", "5514382887", getResources().getDrawable(R.mipmap.pic_ricardo));
-
-        arrayContact.add(juanCarlos);
-        arrayContact.add(christian);
-        arrayContact.add(alex);
-        arrayContact.add(genaro);
-        arrayContact.add(ricardo);
+        arrayContact = Contact.getData(getApplicationContext());
 
         adapter = new ContactAdapter(getApplicationContext(),R.layout.item_list_contact,arrayContact);
 
         listContacts.setAdapter(adapter);
-        listContacts.setOnItemClickListener(new );
+        listContacts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent intent = new Intent(getApplicationContext(), ContactDetailActivity.class);
+                intent.putExtra("CONTACT", position );
+                startActivity(intent);
+            }
+        });
 
 
     }

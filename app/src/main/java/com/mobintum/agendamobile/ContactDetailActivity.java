@@ -1,17 +1,28 @@
 package com.mobintum.agendamobile;
 
-import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
 public class ContactDetailActivity extends ActionBarActivity {
 
+    int contactPosition;
+    Contact contact;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_detail);
+        Intent intent = getIntent();
+        contactPosition = intent.getIntExtra("CONTACT", 0);
+        contact = Contact.getData(getApplicationContext()).get(contactPosition);
+
+        RoundedImageView profileImage = (RoundedImageView) findViewById(R.id.profileImage);
+        profileImage.setImageDrawable(contact.getPicture());
+
+
     }
 
 
