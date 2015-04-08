@@ -1,34 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
 
-    <com.mobintum.agendamobile.RoundedImageView
-        android:id="@+id/imgPic"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/thumb_image"
-        android:layout_weight="2"
-        android:layout_gravity="center"
-        android:scaleType="fitXY"
-        android:src="@mipmap/ic_launcher"
-        android:layout_margin="@dimen/margin_xsmall"
+    android:orientation="horizontal"
+    android:padding="5dip" >
 
-
-       />
-    <LinearLayout
-        android:layout_width="match_parent"
+    <!--  ListRow Left sied Thumbnail image -->
+    <LinearLayout android:id="@+id/thumbnail"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/textName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/hello_world"
-            android:textSize="@dimen/font_medium"/>
+        android:padding="3dip"
+        android:layout_alignParentLeft="true"
+
+        android:layout_marginRight="5dip">
+
+        <com.mobintum.agendamobile.RoundedImageView
+            android:id="@+id/imgPic"
+            android:layout_width="100dip"
+            android:layout_height="100dip"
+            android:src="@mipmap/ic_launcher"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_toRightOf="@+id/thumbnail"
+        android:text="Rihanna Love the way lie"
+        android:textColor="@android:color/black"
+        android:typeface="sans"
+        android:textSize="@dimen/font_small"
+        android:textStyle="bold"/>
 
 
-        </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>
