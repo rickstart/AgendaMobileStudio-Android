@@ -7,7 +7,6 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,7 +21,7 @@ public class ContactDetailActivity extends ActionBarActivity implements View.OnC
 
     int contactPosition;
     Contact contact;
-    ImageButton actionCall, actionEmail;
+    ImageButton actionCall, actionEmail, actionGithub, actionTwitter, actionFacebook;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +37,16 @@ public class ContactDetailActivity extends ActionBarActivity implements View.OnC
         TextView textEmail = (TextView) findViewById(R.id.textEmail);
         actionCall = (ImageButton) findViewById(R.id.actionCall);
         actionEmail = (ImageButton) findViewById(R.id.actionEmail);
+        actionGithub = (ImageButton) findViewById(R.id.actionGithub);
+        actionTwitter = (ImageButton) findViewById(R.id.actionTwitter);
+        actionFacebook = (ImageButton) findViewById(R.id.actionFacebook);
 
         actionCall.setOnClickListener(this);
         actionEmail.setOnClickListener(this);
+        actionGithub.setOnClickListener(this);
+        actionTwitter.setOnClickListener(this);
+        actionFacebook.setOnClickListener(this);
+
         profileImage.setImageDrawable(contact.getPicture());
         textNameDetail.setText(contact.getName());
         textPhone.setText(contact.getPhone());
@@ -78,7 +84,7 @@ public class ContactDetailActivity extends ActionBarActivity implements View.OnC
 
         switch(v.getId()){
             case R.id.actionCall:
-                Log.e("INETNT", "CALL");
+
                 Intent callIntent = new Intent(Intent.ACTION_CALL);
                 String uri = "tel:" + contact.getPhone();
 
@@ -90,16 +96,34 @@ public class ContactDetailActivity extends ActionBarActivity implements View.OnC
 
                 break;
             case R.id.actionEmail:
-                Log.e("INETNT", "email");
+
                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                         "mailto", contact.getEmail(), null));
-                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "EXTRA_SUBJECT");
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "TITULO CONTACTO");
+
 
                 if(isAvailable(getApplicationContext(),emailIntent))
                 startActivity(Intent.createChooser(emailIntent, "Send email..."));
                 else
                     Toast.makeText(getApplicationContext(),"HARWARE NOT AVAILABLE", Toast.LENGTH_LONG).show();
 
+                break;
+
+            case R.id.actionGithub:
+                Intent githubIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.github.com/"+contact.getGithub()));
+                //Intent githubIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("github://user?screen_name=" + contact.getTwitter()));
+                startActivity(githubIntent);
+                break;
+
+            case R.id.actionTwitter:
+
+                Intent twitterIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?screen_name=" + contact.getTwitter()));
+                startActivity(twitterIntent);
+                break;
+
+            case R.id.actionFacebook:
+                Intent facebookIntent = new Intent(Intent.ACTION_VIEW , Uri.parse("fb://profile/"+contact.getFacebook()));
+                startActivity(facebookIntent);
                 break;
         }
     }
@@ -111,4 +135,15 @@ public class ContactDetailActivity extends ActionBarActivity implements View.OnC
                         PackageManager.MATCH_DEFAULT_ONLY);
         return list.size() > 0;
     }
+
+    public Intent getOpenFacebookIntent(Context context) {
+
+        try {
+            context.getPackageManager().getPackageInfo("com.facebook.katana", 0);
+            return new Intent(Intent.ACTION_VIEW, Uri.parse("fb://profile/"+contact.getFacebook()));
+        } catch (Exception e) {
+            return new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/<user_name_here>"));
+        }
+    }
+
 }
