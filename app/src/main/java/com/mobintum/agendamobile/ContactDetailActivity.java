@@ -35,6 +35,9 @@ public class ContactDetailActivity extends ActionBarActivity implements View.OnC
         TextView textNameDetail = (TextView) findViewById(R.id.textNameDetail);
         TextView textPhone = (TextView) findViewById(R.id.textPhone);
         TextView textEmail = (TextView) findViewById(R.id.textEmail);
+        TextView textGithub = (TextView) findViewById(R.id.textGithub);
+        TextView textTwitter = (TextView) findViewById(R.id.textTwitter);
+        TextView textFacebook = (TextView) findViewById(R.id.textFacebook);
         actionCall = (ImageButton) findViewById(R.id.actionCall);
         actionEmail = (ImageButton) findViewById(R.id.actionEmail);
         actionGithub = (ImageButton) findViewById(R.id.actionGithub);
@@ -51,6 +54,9 @@ public class ContactDetailActivity extends ActionBarActivity implements View.OnC
         textNameDetail.setText(contact.getName());
         textPhone.setText(contact.getPhone());
         textEmail.setText(contact.getEmail());
+        textGithub.setText(contact.getGithub());
+        textTwitter.setText(contact.getTwitter());
+        textFacebook.setText(contact.getFacebook());
 
 
     }
